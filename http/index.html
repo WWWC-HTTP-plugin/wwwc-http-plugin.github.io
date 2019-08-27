@@ -1,1 +1,188 @@
-/http/index.html
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>WWWC用改造HTTPプラグイン</title>
+
+<style>
+<!--
+.sup {
+	vertical-align: text-top;
+	line-height: 4px;
+	font-size: 80%;
+}
+
+.sup a {
+	font-style: italic;
+}
+-->
+</style>
+
+</head>
+<body>
+<h1>WWWC用改造HTTPプラグイン</h1>
+<p>
+<a href="http://www.nakka.com/wwwc/">WWWC1.0.4 付属 wwwc.dll</a> →
+<a href="http://sites.google.com/site/wwwcfedev/wwwcdll">WWWC.DLL 改造版</a> →
+<a href="http://svns.hp.infoseek.co.jp/wwwcdll/">wwwcdll_20051206.zip →
+up6755.zip</a> → いまここ<br>
+な改造品。
+</p>
+<p>主な変更点</p>
+<ul>
+<li>RSS / Atom フィードは専用の設定項目を作った</li>
+<li>RSS / Atom フィードは新着記事を全て「開くURL」に設定する</li>
+<li>WSSE 認証対応</li>
+<li>OAuth 認証対応</li>
+<li>HTTPS 対応</li>
+<li>HTTPS のために全面的に WinInet API を使っている</li>
+<li>WinInet API を使っているので IE と同じ Cookie を使うこともできる</li>
+<li>UTF-16LEに対応できた気がする</li>
+<li>初期設定ではリダイレクトしない</li>
+<li>更新時に、引数にURLを付けて指定のプログラムを実行</li>
+</ul>
+<p>
+動作環境と安定性は知らない。バックアップを取りながら試用を重ねてね。このソフトウェアの使用に関しては、何から何まで無保証です。<br>
+新しめの VC++ 2005 ランタイムが必要かもしれません。<a href="http://www.microsoft.com/downloads/ja-jp/details.aspx?FamilyID=ae2e1a40-7b45-4fe9-a20f-2ed2923aca62">これ（2011/06/07）</a>とか。もっと新しいのとか。
+</p>
+<p>
+ダウンロード : <a href="http_140312.zip">http_140312.zip</a> / <a href="http_150513.zip">http_150513.zip</a>（テスト中）<br>
+ソース（改変分のみ） : <a href="http_src_140312.zip">http_src_140312.zip</a> / <a href="http_src_150513.zip">http_src_150513.zip</a>
+</p>
+
+<h2>使い方</h2>
+<p>普通にプロトコルプラグインとして追加。もしくはファイル名を wwwc.dll にして置き換えるだけでもよい。</p>
+<p>設定の保存ファイル名は標準と同じ wwwc.ini なので共有される。</p>
+<p>フィードチェックは、複数のURLが開くURLに設定され、URLを開くときはプログラムへ同時に送られるので、複数URLに対応できないプログラムを使用している場合は、同梱の app.js をツールに登録し、開くプログラムとして使用する。</p>
+<p><a href="setting.html">詳しい設定方法</a></p>
+<h3>使用例：Gmail</h3>
+<ul>
+<li>WWWC を終了した状態で、同梱の sample-oauth_mail.google.com.ini を oauth_mail.google.com.ini に名前変更して DLL と同じフォルダに置く</li>
+<li>全般 タブ<ul>
+	<li>チェックするURLに「https://mail.google.com/mail/feed/atom」を追加</li>
+</ul></li>
+<li>チェック タブ<ul>
+	<li>「RSS / Atom フィード」のチェックを入れる</li>
+</ul></li>
+<li>オプション タブ<ul>
+	<li>「行う」にチェック</li>
+	<li>「OAuth」にチェック</li>
+	<li>「トークン取得」ボタンを押し、ダイアログの説明に従ってトークンを取得する</li>
+</ul></li>
+<!--
+<li>オプション タブ<ul>
+	<li>「このURLはユーザ認証が必要」にチェック</li>
+	<li>Gmailのユーザ名とパスワードを入力</li>
+</ul></li>
+-->
+</ul>
+<p>
+とすると、最も新しい未読メールの日時がWWWCの更新日時、件名が更新情報となる。
+</p>
+
+<h3>使用例：mixi</h3>
+<ul>
+<li>全般 タブ<ul>
+	<li>チェックするURLに「http://mixi.jp/atom/updates/r=1/member_id=00000000」を追加（00000000 は自分のID）</li>
+</ul></li>
+<li>チェック タブ<ul>
+	<li>「RSS / Atom フィード」のチェックを入れる</li>
+</ul></li>
+<li>オプション タブ<ul>
+	<li>「このURLはユーザ認証が必要」にチェックを入れ、「WSSE」を選択</li>
+	<li>mixiのユーザ名とパスワードを入力</li>
+</ul></li>
+</ul>
+
+<h3>フィードチェックの色々な自動設定</h3>
+<p>いろいろされる</p>
+<ul>
+<li>アイテム作成直後等でチェック方法の設定情報が無いとき、URLがフィードっぽければフィードチェックに設定される</li>
+<li>アイテム名が無いか「新しいアイテム」だったとき、フィードの情報からアイテム名が設定される</li>
+<li>サイトURLが無いとき、フィードの情報からサイトURLが設定される</li>
+<li>フィードではないページ（ブログトップページ等）をフィードチェックしたとき、フィードURLの探索を試みて、見つかればチェックするURLに設定される（最初に見つかったURL）</li>
+</li>
+</ul>
+
+<h2>セキュリティに関して</h2>
+<p>
+この改造版によって追加された、フィードおよびリンク抽出による更新チェックは、従来のチェック方法とは異なり、ウェブページ内容に由来する情報を WWWC の「開くURL」として設定します。<br>
+自らが直接設定するのではなく、ウェブページの内容が自動的に設定されるということは、ウェブページの内容が悪意あるものであった場合、使用しているコンピュータに深刻な被害が発生する可能性があります。
+</p>
+
+<p>危険性の単純な確認方法として、適当なアイテムの「開くURL」に、適当なプログラム（例えば C:\Program Files\Windows Media Player\wmplayer.exe）を設定し、そのアイテムを実行してみてください。<br>
+設定したプログラムが実行されるはずです。<br>
+同様に、フィードおよびリンク抽出による更新チェックによって、悪意あるコマンドが「開くURL」に設定された場合、それを実行してしまうことになります。<br>
+これは、URL の実行を Windows の関連付け実行に委ねているためです。<br>
+ツールプラグインを経由する場合は、そのプラグインにおける実行方法によりますが、同様の動作になることもあります。
+</p>
+
+これは、URL を開くプログラムを明確に指定することで回避できます。<br>
+実行プログラムを指定することで、Windows の関連付け実行がされなくなり、また正常なブラウザであれば、URL を指定されるべき所でコマンドを指定されても、そのコマンドがそのまま実行されることはありません。
+</p>
+
+<p>
+なお、この実行プログラムとして、同梱の app.js を使用することは対策にはなりません。<br>
+app.js も同様に Windows の関連付け実行をするからです。<br>
+app.js を使用する場合は、app.js を編集し、ソースの最初にある 変数 app で実行するプログラムを指定してください。
+</p>
+
+<h2>既知の欠陥</h2>
+<ul>
+<li>WWWCから直接実行できるURLが合計255バイトまでっぽいので、フィードチェックで新着記事が多いと落ちる<ul>
+	<li>PlayItemを経由すれば4000バイトくらいまで扱える</li>
+	<li>WWWC（Ver 1.0.4）のソース、File.c の1266行で BUFSIZE をもっと増やすといいのかも</li>
+</ul></li>
+<li>PlayItemのウィンドウで表示できる文字列が255バイトまで<ul>
+	<li>長い記事タイトル付加+長いURLで超える可能性
+	<li>PlayItem（Ver 0.0.1）のソース、main.c の329行で BUFSIZE をもっと増やすといいのかも
+</ul></li>
+<li>PlayItemは、保持中のアイテムと同じアイテム名・チェックURLのアイテムが更新通知されても無視する<ul>
+	<li>フィードチェックは開くURLを変更するので、PlayItemが前回更新を保持中だと無視される</li>
+	<li>プロトコル設定で「更新情報をアイテム名に追加」するとアイテム名が変わって無視されない</li>
+	<li>前項バッファサイズと併せて、開くURLも比較するように改造した<a href="PlayItemP.zip">PlayItemあり</a></li>
+</ul></li>
+<li>HTTPS 時において、同じサーバをチェック対象とする複数のアイテムで、証明書エラーを無視する設定のものと無視しない設定のものがある場合、無視する設定のアイテムでも無視されないことがある。</li>
+</ul>
+
+<h2>履歴</h2>
+<ul>
+<li>2015/05/13 OAuth2.0 に対応（たぶん）</li>
+<li>2014/03/12 RSS2.0 で link 要素がないときに guid 要素から記事 URL を得るようにした</li>
+<li>2014/01/02 よくわからないけどマニフェストで何かを失敗していた不具合修正</li>
+<li>2013/12/31 RSS で link 要素が空（&lt;link/&gt;）だったときに落ちる不具合修正</li>
+<li>2013/03/09 「ソース表示」「タイトル取得」をしたとき、レスポンスヘッダに Content-Length フィールドが無く、かつ本体データが無いときに落ちる不具合修正</li>
+<li>2013/02/04 アイテムメニューに「更新情報のクリア」を追加</li>
+<li>2013/01/06 「新着記事を個別に更新通知」しているときの「URL抽出」で、同じ新着 URL が複数出現した時の除外が不十分な不具合修正。フィルタの条件指定に、OR 検索（のようなもの）で抽出を行う「O」を追加。</li>
+<li>2012/12/20 「URL抽出」の正規表現整形で、\ エスケープに続けて \ があったとき（例：\\\1）に、整形結果の末尾が切れる不具合修正。鬼車 Version 5.9.3。</li>
+<li>2012/03/03 アイテム作成直後に OAuth トークン取得を行うとメモリ処理に失敗して落ちる不具合修正</li>
+<li>2012/02/05 フィードフィルタに「選択 (OR)」を追加（たぶん。実作業した3か月前から放置していて覚えていない）</li>
+<li>2011/10/02 OAuth で 検証コードを URI エンコードするようにした</li>
+<li>2011/10/01 OAuth で URI エンコードをする箇所を増やした</li>
+<li>2011/09/17 WinInet API のエラー番号をエラーメッセージに変えて出力するようにした。OAuth 対応の試験。</li>
+<li>2010/07/28 「新着通知を個別に更新通知」を行うときに、ツールプラグインで「実行後にアイコンを初期化する」を行うと更新情報が消える不具合修正。チェックエラー時にメッセージボックスを出す試験。本体データ取得の省略が、フィルタ使用時でも行われる不具合修正。</li>
+<li>2010/06/24 スレッド管理を間違えていたような不具合修正</li>
+<li>2010/06/21 アイテム設定数値の読み出しに失敗する不具合修正</li>
+<li>2010/06/03 metaチェックでも更新情報を保存するようにした。Set-Cookie を保存できるようにした。フィードチェック・リンク抽出で、新着URLを1件ずつ更新通知できるようにした。</li>
+<li>2010/04/17 POST時の応答に Content-Length があると、リクエスト方法が「自動」に変更される不具合修正</li>
+<li>2010/04/16 リダイレクトもできるようにした。フィード形式に反した日付形式を許容。POST時のチェック方法が限定されるのはおかしい気がしたので修正。</li>
+<li>2010/03/05 従来機能の数値文字参照復号でASCII文字以外に対応</li>
+<li>2010/02/19 リンク抽出搭載</li>
+<li>2010/02/13 特殊文字等の変換を自分好みに微調整</li>
+<li>2010/02/09 正規表現をうまいことしたつもり</li>
+<li>2010/02/08 正規表現搭載（正規表現ライブラリ「鬼車」）</li>
+<li>2010/02/06 公開</li>
+</ul>
+
+<h2>リンク</h2>
+<ul>
+<li><a href="http://www.nakka.com/">nakka.com</a> / <a href="http://www.nakka.com/wwwc/">WWWC</a></li>
+<!--<li><a href="http://svns.hp.infoseek.co.jp/">svns</a> / <a href="http://svns.hp.infoseek.co.jp/wwwcdll/">RSS対応 WWWC.DLL</a></li>-->
+<li><a href="http://www.geocities.jp/kosako3/">Kosako</a> / <a href="http://www.geocities.jp/kosako3/oniguruma/index_ja.html">鬼車</a>
+<!--<li><a href="http://www.25hoursaday.com/">Dare Obasanjo's Home Page</a> / <a href="http://www.25hoursaday.com/draft-obasanjo-feed-URI-scheme-02.html">The feed URI scheme (PRE-DRAFT)</a><span class="sup">[<a href="http://ja.wikipedia.org/wiki/Wikipedia:%E3%82%A6%E3%82%A3%E3%82%AD%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88_%E5%A4%96%E9%83%A8%E3%83%AA%E3%83%B3%E3%82%AF/%E3%83%AA%E3%83%B3%E3%82%AF%E5%88%87%E3%82%8C" title="Wikipedia:ウィキプロジェクト 外部リンク/リンク切れ">リンク切れ</a>]</span></li>-->
+</ul>
+
+</body>
+</html>
