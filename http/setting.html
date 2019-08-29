@@ -1,9 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
-<title>WWWC�p����HTTP�v���O�C���̐ݒ���@</title>
+<title>WWWC用改造HTTPプラグインの設定方法</title>
 <style type="text/css">
 <!--
 h1 {
@@ -59,110 +59,110 @@ th, td {
 </style>
 </head>
 <body>
-<p><a href="./">&lt;&lt; �g�b�v�y�[�W��</a></p>
+<p><a href="./">&lt;&lt; トップページへ</a></p>
 
-<h1>WWWC�p����HTTP�v���O�C���̐ݒ���@</h1>
-<p>WWWC�p����HTTP�v���O�C���̓Ǝ������̐��������܂��B<br>
-���̑��̊�{�I�Ȑݒ���@�� WWWC �̃w���v���Q�Ƃ��Ă��������B<br>
-�y�[�W�z�F�� WWWC �̃w���v�����B</p>
+<h1>WWWC用改造HTTPプラグインの設定方法</h1>
+<p>WWWC用改造HTTPプラグインの独自部分の説明をします。<br>
+その他の基本的な設定方法は WWWC のヘルプを参照してください。<br>
+ページ配色は WWWC のヘルプ風味。</p>
 
-<h2>�ڎ�</h2>
+<h2>目次</h2>
 <ul>
-<li><a href="#itemdata">�ۑ������A�C�e�����̈Ⴂ</a></li>
-<li><a href="#protocol">�v���g�R���ݒ�</a>
+<li><a href="#itemdata">保存されるアイテム情報の違い</a></li>
+<li><a href="#protocol">プロトコル設定</a>
 <ul>
-<li><a href="#protocol-check">�`�F�b�N�^�u</a></li>
-<li><a href="#protocol-feed">�t�B�[�h�^�u</a></li>
+<li><a href="#protocol-check">チェックタブ</a></li>
+<li><a href="#protocol-feed">フィードタブ</a></li>
 </ul>
 </li>
-<li><a href="#item">�A�C�e���ݒ�</a>
+<li><a href="#item">アイテム設定</a>
 <ul>
-<li><a href="#item-check">�`�F�b�N�^�u</a>
+<li><a href="#item-check">チェックタブ</a>
 <ul>
-<li><a href="#item-check-feed">RSS / Atom �t�B�[�h</a></li>
-<li><a href="#item-check-draw">URL���o</a></li>
+<li><a href="#item-check-feed">RSS / Atom フィード</a></li>
+<li><a href="#item-check-draw">URL抽出</a></li>
 </ul>
 </li>
-<li><a href="#item-option">�I�v�V�����^�u</a></li>
+<li><a href="#item-option">オプションタブ</a></li>
 </ul>
 </li>
 </ul>
 
-<h2 id="itemdata">�ۑ������A�C�e�����̈Ⴂ</h2>
-<p>�ȉ��̃A�C�e�����̕ۑ��̈悪�A�����œƎ��̃A�C�e�����̕ۑ��̈�Ƃ��Ďg���Ă��܂��B<br>
-�{���̃A�C�e����񂪕ۑ�����Ȃ��ق��A���̃A�C�e������ǂݏ�������v���O�C���ŕs�����������\��������܂��B</p>
+<h2 id="itemdata">保存されるアイテム情報の違い</h2>
+<p>以下のアイテム情報の保存領域が、改造版独自のアイテム情報の保存領域として使われています。<br>
+本来のアイテム情報が保存されないほか、そのアイテム情報を読み書きするプラグインで不具合が発生する可能性があります。</p>
 
 <ul>
-<li>���T�C�Y �� �T�C�g URL</li>
-<li>���X�V�� �� �uRSS / Atom �t�B�[�h�v�u�����N���o�v�`�F�b�N�p�ݒ�</li>
-<li>�G���[��� �� �X�V���A�G���[���</li>
+<li>旧サイズ → サイト URL</li>
+<li>旧更新日 → 「RSS / Atom フィード」「リンク抽出」チェック用設定</li>
+<li>エラー情報 → 更新情報、エラー情報</li>
 </ul>
 
-<h2 id="protocol">�v���g�R���ݒ�</h2>
+<h2 id="protocol">プロトコル設定</h2>
 
-<h3 id="protocol-check">�`�F�b�N�^�u</h3>
+<h3 id="protocol-check">チェックタブ</h3>
 <dl>
-<dt>�G���[��ʒm����</dt>
-<dd>�`�F�b�N���ɃG���[���������ꍇ�A�G���[���e�Ɋւ��郁�b�Z�[�W�{�b�N�X��\�����܂��B<br>
-<img src="checkerror.png" width="444" height="145" alt="�G���[�ʒm���b�Z�[�W�{�b�N�X"></dd>
+<dt>エラーを通知する</dt>
+<dd>チェック時にエラーが生じた場合、エラー内容に関するメッセージボックスを表示します。<br>
+<img src="checkerror.png" width="444" height="145" alt="エラー通知メッセージボックス"></dd>
 </dl>
 
-<h3 id="protocol-feed">�t�B�[�h�^�u</h3>
-<p>�`�F�b�N���@�uRSS / Atom �t�B�[�h�v�u�����N���o�v�̐ݒ�ł��B</p>
+<h3 id="protocol-feed">フィードタブ</h3>
+<p>チェック方法「RSS / Atom フィード」「リンク抽出」の設定です。</p>
 
 <dl>
-<dt>�X�V�����X�V�����ɒǉ�</dt>
-<dd>�X�V���i�G���[�����܂ށB�ȉ������B�j���X�V�����ɒǉ����܂��B<br>
-�Ⴆ�΍X�V��񂪁u�����̏o�����v�A�X�V�������u2011/01/01 12:00:00�v�̂Ƃ��A�u2011/01/01 12:00:00 �����̏o�����v���X�V�����Ƃ��Đݒ肵�܂��B<br>
-����́A���̉����łɂ�����t�B�[�h�`�F�b�N�̍X�V�ʒm���@�ɕ�������̂ł��B<br>
-<img src="infotodate.png" width="207" height="38" alt="�X�V��񂪍X�V�����ɒǉ�����Ă���X�N���[���V���b�g" class="border">
+<dt>更新情報を更新日時に追加</dt>
+<dd>更新情報（エラー情報を含む。以下同じ。）を更新日時に追加します。<br>
+例えば更新情報が「今日の出来事」、更新日時が「2011/01/01 12:00:00」のとき、「2011/01/01 12:00:00 今日の出来事」を更新日時として設定します。<br>
+これは、元の改造版におけるフィードチェックの更新通知方法に倣ったものです。<br>
+<img src="infotodate.png" width="207" height="38" alt="更新情報が更新日時に追加されているスクリーンショット" class="border">
 </dd>
 
-<dt>�X�V�����A�C�e�����ɒǉ�</dt>
-<dd>�X�V�����A�C�e�����ɒǉ����܂��B<br>
-�Ⴆ�΍X�V��񂪁u�����̏o�����v�A�A�C�e�������u�Ƃ���A�C�e���v�̂Ƃ��A�u�Ƃ���A�C�e�� | �����̏o�����v���A�C�e�����Ƃ��Đݒ肵�܂��B<br>
-����́A�X�V���ꂽ�A�C�e�������\������� PlayItem �ŁA�X�V�����\�����邱�Ƃ���ړI�Ƃ������̂ł��B<br>
-�Ȃ��A���̐ݒ�Ɋւ�炸�X�V�����\������悤�ɂ��������� <a href="PlayItemP.zip">PlayItem</a> ������܂��B<br>
-<img src="infototitle.png" width="182" height="41" alt="�X�V��񂪃A�C�e�����ɒǉ�����Ă���X�N���[���V���b�g" class="border"><br>
-<img src="infototitleplayitem.png" width="580" height="46" alt="�X�V��񂪃A�C�e�����ɒǉ�����Ă��� PlayItem �̃X�N���[���V���b�g"></dd>
+<dt>更新情報をアイテム名に追加</dt>
+<dd>更新情報をアイテム名に追加します。<br>
+例えば更新情報が「今日の出来事」、アイテム名が「とあるアイテム」のとき、「とあるアイテム | 今日の出来事」をアイテム名として設定します。<br>
+これは、更新されたアイテム名が表示される PlayItem で、更新情報も表示することを主目的としたものです。<br>
+なお、この設定に関わらず更新情報も表示するようにした改造版 <a href="PlayItemP.zip">PlayItem</a> もあります。<br>
+<img src="infototitle.png" width="182" height="41" alt="更新情報がアイテム名に追加されているスクリーンショット" class="border"><br>
+<img src="infototitleplayitem.png" width="580" height="46" alt="更新情報がアイテム名に追加されている PlayItem のスクリーンショット"></dd>
 
-<dt>&amp;amp;��2�d�ɕ���(&amp;amp;quot; -&gt; ")</dt>
-<dd>�t�B�[�h���� &amp;amp; ��2�d�ɕ������܂��B<br>
-XML ���ŁA�Ⴆ�΁u&gt;�v�ł���Ζ{���́u&amp;gt;�v�ƕϊ�����Ă���ׂ��Ƃ���ŁA2�d�ɕϊ�����āu&amp;amp;gt;�v�ƂȂ��Ă���Ƃ��A
-�`�F�b�N���ɂ�����ʏ�̕��������ł́A�u&amp;gt;�v�ɕ�������܂����A���������1�񕜌��������s���u&gt;�v�ɕ������܂��B<br>
-����́ATwitter �� RSS ���ł̎��̎Q�Ƃɂ����āA&amp; �L�� �� &amp;amp; �Ƃ���2�d�ɕϊ�����Ă��邱�ƂɑΉ����邱�Ƃ�ړI�Ƃ������̂ł��B<br>
-<img src="doubledecode.png" width="206" height="54" alt="���̎Q�Ƃ̕\����Ԃ̃X�N���[���V���b�g" class="border">
+<dt>&amp;amp;を2重に復元(&amp;amp;quot; -&gt; ")</dt>
+<dd>フィード内の &amp;amp; を2重に復元します。<br>
+XML 内で、例えば「&gt;」であれば本来は「&amp;gt;」と変換されているべきところで、2重に変換されて「&amp;amp;gt;」となっているとき、
+チェック時における通常の復元処理では、「&amp;gt;」に復元されますが、これをもう1回復元処理を行い「&gt;」に復元します。<br>
+これは、Twitter の RSS 内での実体参照において、&amp; 記号 が &amp;amp; として2重に変換されていることに対応することを目的としたものです。<br>
+<img src="doubledecode.png" width="206" height="54" alt="実体参照の表示状態のスクリーンショット" class="border">
 </dd>
 
-<dt>�V���L�����ʂɍX�V�ʒm</dt>
-<dd>�V���L�����ʂɍX�V�ʒm���܂��B<br>
-1�̃A�C�e���ŕ����̐V���L�����������ꍇ�A�ʏ�́A�ŐV�L�������X�V���Ƃ��A�S�V���L���� URL �𔼊p�X�y�[�X�Ōq�������̂��J�� URL �Ƃ��Đݒ肳���̂ɑ΂��A���̐ݒ�ł́A�X�̐V���L�������z�I�ȃA�C�e���Ƃ��āA�ʁX�ɍX�V�ʒm���o���܂��B<br>
-����́A�X�V���b�Z�[�W�E�B���h�E�� PlayItem �ȂǂŁA�X�̐V���L���̍X�V����1�������Ȃ��瑀�삷�邱�Ƃ���ړI�Ƃ������̂ł��B
+<dt>新着記事を個別に更新通知</dt>
+<dd>新着記事を個別に更新通知します。<br>
+1つのアイテムで複数の新着記事があった場合、通常は、最新記事名を更新情報とし、全新着記事の URL を半角スペースで繋げたものが開く URL として設定されるのに対し、この設定では、個々の新着記事を仮想的なアイテムとして、別々に更新通知を出します。<br>
+これは、更新メッセージウィンドウや PlayItem などで、個々の新着記事の更新情報を1件ずつ見ながら操作することを主目的としたものです。
 </dd>
 </dl>
 
-<h2 id="item">�A�C�e���ݒ�</h2>
+<h2 id="item">アイテム設定</h2>
 
-<h3 id="item-check">�`�F�b�N�^�u</h3>
+<h3 id="item-check">チェックタブ</h3>
 
-<h4 id="item-check-feed">RSS / Atom �t�B�[�h</h4>
-<p>�t�B�[�h���`�F�b�N���A�O��̍X�V�������V���������̋L����S�čX�V�ʒm���܂��B<br>
-�������A�����̓����̋L���͖�������܂��B</p>
+<h4 id="item-check-feed">RSS / Atom フィード</h4>
+<p>フィードをチェックし、前回の更新日時より新しい日時の記事を全て更新通知します。<br>
+ただし、未来の日時の記事は無視されます。</p>
 
 <dl>
-<dt>URL / �薼 / �J�e�S�� / ���e / �v��</dt>
-<dd>�L�����𐳋K�\���Ŏw�肷�邱�Ƃɂ���āA�V���L������̑I�����邱�Ƃ��ł��܂��B<br>
-������������͗���1�s1���ŋL�q���A���̂����ꂩ�Ƃ̈�v�����܂��iOR �����j�B<br>
-�I������ɂ��A���������Ɉ�v�����A�܂��͂��Ȃ������L�����X�V�ʒm���珜�O����܂��B
+<dt>URL / 題名 / カテゴリ / 内容 / 要約</dt>
+<dd>記事情報を正規表現で指定することによって、新着記事を取捨選択することができます。<br>
+検索条件を入力欄に1行1件で記述し、そのいずれかとの一致を見ます（OR 検索）。<br>
+選択方式により、検索条件に一致した、またはしなかった記事が更新通知から除外されます。
 
 <ul>
-<li>�I�� : ��v�����L���̂ݑI�����A���̋L�������O���܂�</li>
-<li>�I�� (OR) : ���̕�����ݒ肵�����ڂ̂����ꂩ�ň�v�����L���̂ݑI�����A���̋L�������O���܂�</li>
-<li>���O :  ��v�����L�������O���܂�</li>
+<li>選択 : 一致した記事のみ選択し、他の記事を除外します</li>
+<li>選択 (OR) : この方式を設定した項目のいずれかで一致した記事のみ選択し、他の記事を除外します</li>
+<li>除外 :  一致した記事を除外します</li>
 </ul>
 
-<table summary="�e���ڂ̑ΏۂƂȂ� XML �v�f">
-<caption>�e���ڂ̑ΏۂƂȂ� XML �v�f</caption>
+<table summary="各項目の対象となる XML 要素">
+<caption>各項目の対象となる XML 要素</caption>
 
 <thead>
 <tr>
@@ -176,15 +176,15 @@ XML ���ŁA�Ⴆ�΁u&gt;�v�ł���Ζ{���́u&amp;gt;�v�ƕϊ�����Ă���ׂ��Ƃ���ŁA
 
 <tbody>
 <tr>
-<th>�J�e�S��</th>
+<th>カテゴリ</th>
 <td>dc:subject</td>
 <td>category</td>
 <td>dc:subject</td>
-<td>category (term ����)</td>
+<td>category (term 属性)</td>
 </tr>
 
 <tr>
-<th>���e</th>
+<th>内容</th>
 <td>content:encoded</td>
 <td>content:encoded</td>
 <td>content</td>
@@ -192,7 +192,7 @@ XML ���ŁA�Ⴆ�΁u&gt;�v�ł���Ζ{���́u&amp;gt;�v�ƕϊ�����Ă���ׂ��Ƃ���ŁA
 </tr>
 
 <tr>
-<th>�v��</th>
+<th>要約</th>
 <td>description</td>
 <td>description</td>
 <td>summary</td>
@@ -202,83 +202,126 @@ XML ���ŁA�Ⴆ�΁u&gt;�v�ł���Ζ{���́u&amp;gt;�v�ƕϊ�����Ă���ׂ��Ƃ���ŁA
 </table>
 </dd>
 
-<dt>�\�[�X�u��</dt>
-<dd>�t�B�[�h������V���L�������o���O�ɁA�t�B�[�h�̃\�[�X��u�����܂��B<br>
-�����\���Ƃ���ɑ΂���u����������A���͗���1�s���ƁA2�s1�g�ŌJ��Ԃ��L�q���܂��B<br>
-�z��O�� XML �v�f���t�B���^�Ώۂ̗v�f�ɒu��������ł��܂��B</dd>
+<dt>ソース置換</dt>
+<dd>フィード内から新着記事を取り出す前に、フィードのソースを置換します。<br>
+検索表現とこれに対する置換文字列を、入力欄に1行ごと、2行1組で繰り返し記述します。<br>
+想定外の XML 要素をフィルタ対象の要素に置換したりできます。</dd>
 </dl>
 
-<h4 id="item-check-draw">URL���o</h4>
-<p>HTML �������̃����N�ȂǁA�����\���Ɉ�v����V���ȕ������V�� URL �Ƃ��Ē��o���A�X�V�ʒm���܂��B<br>
-�����\���Ɉ�v����������΁A�����Ώۂ͓��� A �^�O�ɂ͌���܂���B</p>
+<h4 id="item-check-draw">URL抽出</h4>
+<p>HTML 文書中のリンクなど、検索表現に一致する新たな文字列を新着 URL として抽出し、更新通知します。<br>
+検索表現に一致しさえすれば、検索対象は特に A タグには限りません。</p>
 
 <dl>
-<dt>��������</dt>
-<dd>�����\���Ɉ�v����������ɑ΂��āA�V���Ɣ��f�����ł��B<br>
+<dt>検索順序</dt>
+<dd>検索表現に一致した文字列に対して、新着と判断する基準です。<br>
 <ul>
-<li>�ォ�� : �`�F�b�N�Ώۂ���i�擪�j���猟�����A�O��̌������ʂ̈�ԏ�̂��̂��o�Ă���܂ł�V���Ƃ��܂�</li>
-<li>������ : �`�F�b�N�Ώۂ����i�����j���猟�����A�O��̌������ʂ̈�ԉ��̂��̂��o�Ă���܂ł�V���Ƃ��܂�</li>
-<li>�S�� : �`�F�b�N�Ώۂ�S�Č������A�O��͂Ȃ��������̂�V���Ƃ��܂�</li>
+<li>上から : チェック対象を上（先頭）から検索し、前回の検索結果の一番上のものが出てくるまでを新着とします</li>
+<li>下から : チェック対象を下（末尾）から検索し、前回の検索結果の一番下のものが出てくるまでを新着とします</li>
+<li>全部 : チェック対象を全て検索し、前回はなかったものを新着とします</li>
 </ul>
 </dd>
 
-<dt>URL����</dt>
-<dd>�`�F�b�N�Ώۂ���AURL �𐳋K�\���Ō������܂��B</dd>
+<dt>URL検索</dt>
+<dd>チェック対象から、URL を正規表現で検索します。</dd>
 
-<dt>URL���`</dt>
-<dd>�����Ɉ�v����������ɑ΂��A����Q�Ƃ��g���čŏI�I�� URL �ɐ��`���܂��B<br>
-�������ʂɑ΂��� URL �������w�肵����A���΃����N��⊮���Ċ��S�� URL �ɂ����肵�܂��B</dd>
+<dt>URL整形</dt>
+<dd>検索に一致した文字列に対し、後方参照を使って最終的な URL に整形します。<br>
+検索結果に対して URL 部分を指定したり、相対リンクを補完して完全な URL にしたりします。</dd>
 
-<dt>�X�V��񌟍�</dt>
-<dd>�`�F�b�N�Ώۂ���A�A�C�e�����Ɏg���X�V���𐳋K�\���Ō������܂��B<br>
-�ȗ��B</dd>
+<dt>更新情報検索</dt>
+<dd>チェック対象から、アイテム情報に使う更新情報を正規表現で検索します。<br>
+省略可。</dd>
 
-<dt>�X�V��񐮌`</dt>
-<dd>�����Ɉ�v����������ɑ΂��A����Q�Ƃ��g���čŏI�I�ȍX�V���ɐ��`���܂��B<br>
-�������ʂɑ΂��X�V��񕔕����w�肵���肵�܂��B<br>
-�u�X�V��񌟍��v���ȗ����Ă���ꍇ�A�uURL�����v�̌���Q�Ƃ��g���܂��B<br>
-�ȗ��B</dd>
+<dt>更新情報整形</dt>
+<dd>検索に一致した文字列に対し、後方参照を使って最終的な更新情報に整形します。<br>
+検索結果に対し更新情報部分を指定したりします。<br>
+「更新情報検索」を省略している場合、「URL検索」の後方参照が使われます。<br>
+省略可。</dd>
 </dl>
 
-<h3 id="item-option">�I�v�V�����^�u</h3>
+<h3 id="item-option">オプションタブ</h3>
 
 <dl>
 <dt>WSSE</dt>
-<dd>WSSE �F�؂����܂��B</dd>
+<dd>WSSE 認証をします。<br>
+かつては mixi などで使われていましたが、現在では廃れた認証方式です。</dd>
 
 <dt>OAuth</dt>
-<dd>OAuth �F�؂����܂��B<br>
-OAuth �̓��[�U���E�p�X���[�h�ł͂Ȃ��A�g�[�N�����g���ĔF�؂����܂��B<br>
-�u�g�[�N���擾�v�{�^���������A�\�����ꂽ�_�C�A���O�̎w���ɏ]���ăg�[�N�����擾���Ă��������B
-<p>OAuth �́A���̋K�i��A�Ή��A�v���P�[�V�������e�E�F�u�T�[�r�X�ɓo�^����K�v������܂��B<br>
-�ʏ�̓A�v���P�[�V�����̍�҂����̓o�^�����܂����A���̉����v���O�C���͓���E�F�u�T�[�r�X�p�̃A�v���P�[�V�����Ƃ����킯�ł͂Ȃ��̂ŁA���p�҂��g�������X�̃E�F�u�T�[�r�X�ɁA�����v���O�C����҂�����o�^�����ɂ����̂͌����I�ł͂���܂���B<br>
-�]���āA�e�E�F�u�T�[�r�X�ւ̃A�v���P�[�V�����̓o�^�́A�e���p�҂��s���Ă��������B<br>
-�o�^�����v���O�C���֐ݒ肷��ɂ́Aini �t�@�C�����쐬���Ă��������B<br>
-oauth_<var>&lt;�ΏۃT�C�g�̃z�X�g��&gt;</var>.ini<br>
-�Ƃ������O�ŁA�v���O�C�� DLL �Ɠ����t�H���_�Ƀt�@�C�������A���ɐݒ���L�q���܂��B<br>
-�ݒ�l���́A������ sample-oauth_api.twitter.com.ini ���Q�Ƃ��Ă��������B</p></dd>
+<dd>OAuth 認証をします。<br>
+OAuth はユーザ名・パスワードではなく、トークンを使って認証をします。<br>
+「トークン取得」ボタンを押し、表示されたダイアログの指示に従ってトークンを取得してください。<br>
+「ユーザ」「パスワード」欄は、手入力の必要はありません。
+<p>OAuth は、その規格上、対応アプリケーションを各ウェブサービスに登録する必要があります。<br>
+通常はアプリケーションの作者がこの登録をしますが、この改造プラグインは特定ウェブサービス用のアプリケーションというわけではないので、利用者が使いたい個々のウェブサービスに、改造プラグイン作者が逐一登録をしにいくのは現実的ではありません。<br>
+従って、各ウェブサービスへのアプリケーションの登録は、各利用者が行ってください。<br>
+登録情報をプラグインへ設定するには、ini ファイルを作成してください。<br>
+oauth_<var>&lt;対象サイトのホスト名&gt;</var>.ini<br>
+という名前で、プラグイン DLL と同じフォルダにファイルを作り、中に設定を記述します。<br>
+設定様式は、同梱の sample-oauth_api.twitter.com.ini を参照してください。</p>
+<h4>使用例：Gmail</h4>
+<ul>
+	<li><a href="https://console.developers.google.com/">https://console.developers.google.com/</a> でアカウント設定をする。操作画面が時折変更されるので、該当項目を適宜探してほしい。<ul>
+		<li>「プロジェクトを作成」<ul>
+			<li>プロジェクト名：このプラグインを指す適当な名前</li>
+			<li>プロジェクトID：このプラグインを指す適当なID</li>
+		</ul></li>
+		<li>「API」<ul>
+			<li>Gmail API を追加</li>
+		</ul></li>
+		<li>「同意画面」<ul>
+			<li>スコープ：https://mail.google.com/ を追加</li>
+			<li>他、適宜入力</li>
+		</ul></li>
+		<li>「認証情報」<ul>
+			<li>OAuth クライアント ID を作成</li>
+			<li>アプリケーションの種類：その他（インストールされているアプリケーション）</li>
+			<li>「クライアント ID」「クライアント シークレット」を控える</li>
+		</ul></li>
+	</ul></li>
+	<li>WWWC の設定
+		<ul>
+			<li>WWWC を終了した状態で、同梱の sample-oauth_mail.google.com.ini を oauth_mail.google.com.ini に名前変更して DLL と同じフォルダに置く</li>
+			<li>oauth_mail.google.com.ini を開き、「ClientIdentifier」と「ClientSecret」の値を、上記で控えた「クライアント ID」「クライアント シークレット」にして保存する
+			<li>WWWC を起動してアイテムを作成</li>
+			<li>全般 タブ<ul>
+				<li>チェックするURLに「https://mail.google.com/mail/feed/atom」を入力する</li>
+				<li>ここで一旦「OK」してアイテム作成を終了させてから、再度当該アイテムのプロパティを開く</li>
+			</ul></li>
+			<li>チェック タブ<ul>
+				<li>「RSS / Atom フィード」をチェックする</li>
+			</ul></li>
+			<li>オプション タブ<ul>
+				<li>「行う」をチェックする</li>
+				<li>「OAuth」をチェックする</li>
+				<li>「トークン取得」ボタンを押し、ダイアログの説明に従ってトークンを取得する</li>
+			</ul></li>
+		</ul>
+	</li>
+</ul>
+とすると、最も新しい未読メールの日時がWWWCの更新日時、件名が更新情報となる。</dd>
 
-<dt>Set-Cookie��ۑ��i�������j</dt>
-<dd>��M���� Set-Cookie ��S�ĕۑ����A���ȍ~�̃`�F�b�N�Ŏg�p���܂��B<br>
-Cookie �̓K�p�͈͂Ȃǂ̎w��͑S�Ė�������܂��B</dd>
+<dt>Set-Cookieを保存（無制限）</dt>
+<dd>受信した Set-Cookie を全て保存し、次以降のチェックで使用します。<br>
+Cookie の適用範囲などの指定は全て無視されます。</dd>
 
-<dt>IE�Ƌ��p�Ŏ�������M����</dt>
-<dd>Internet Explorer �Ɠ��� Cookie ���g���܂��B</dd>
+<dt>IEと供用で自動送受信する</dt>
+<dd>Internet Explorer と同じ Cookie を使います。</dd>
 
-<dt>HTTPS�ʐM�ɑ΂��铐���E��ₓ���h���Ȃ�</dt>
-<dd>HTTPS �ʐM���ɁA�ʏ�ُ͈�Ƃ��ĎՒf���ׂ��s���ȃT�[�o�ؖ����ɂ��ʐM���s���܂��B<br>
-����́A�s���ȃT�[�o�ؖ������g�p���Ă���T�[�o��̃y�[�W���`�F�b�N���邱�Ƃ���ړI�Ƃ��Ă��܂��B<br>
-�T�[�o�ؖ����͈Í����ʐM�̑�����m�F���邽�߂Ɏg���邽�߁A�s���ȃT�[�o�ؖ������󂯓����ꍇ�A��O�҂��ڑ���T�[�o�ɂȂ肷�܂�����ł���悤�ɂȂ�܂��B<br>
-���̂��߁A�������₂�h�����A�ʐM���e��铽����Ƃ����{���̈Í����ʐM�͐������܂���B</dd>
+<dt>HTTPS通信に対する盗聴・改竄等を防がない</dt>
+<dd>HTTPS 通信時に、通常は異常として遮断すべき不正なサーバ証明書による通信を行います。<br>
+これは、不正なサーバ証明書を使用しているサーバ上のページをチェックすることを主目的としています。<br>
+サーバ証明書は暗号化通信の相手を確認するために使われるため、不正なサーバ証明書を受け入れる場合、第三者が接続先サーバになりすましたりできるようになります。<br>
+このため、盗聴や改竄を防げず、通信内容を秘匿するという本来の暗号化通信は成立しません。</dd>
 
-<dt>�X�V���Ɏ��s</dt>
-<dd>�A�C�e���ɍX�V���������Ƃ��A�����Ŏw��̃v���O�������A�����Ɂu�u���E�U�ŊJ��URL�v��t���Ď��s���܂��B<br>
-�v���O�����̃p�X���X�y�[�X���܂ޏꍇ�́u&quot;�v�Ŋ����Ă��������B<br>
-�v���O�����w��ɂ͑��̈�����t���Ă������Ƃ��ł��܂����A���̏ꍇ�A�����̋�؂�ƂȂ�X�y�[�X�𖖔��ɉ����Ă����K�v������܂��B</dd>
+<dt>更新時に実行</dt>
+<dd>アイテムに更新があったとき、下欄で指定のプログラムを、引数に「ブラウザで開くURL」を付けて実行します。<br>
+プログラムのパスがスペースを含む場合は「&quot;」で括ってください。<br>
+プログラム指定には他の引数を付けておくこともできますが、この場合、引数の区切りとなるスペースを末尾に加えておく必要があります。</dd>
 
-<dt>�X�V�ʒm���Ȃ�</dt>
-<dd>�X�V�ʒm���o���Ȃ��悤�ɂ��܂��B<br>
-����́A�A�C�e���̍X�V���v���O�������s�̃g���K�[�Ƃ��Ă����g�����Ƃ���ړI�Ƃ��Ă��܂��B</dd>
+<dt>更新通知しない</dt>
+<dd>更新通知を出さないようにします。<br>
+これは、アイテムの更新をプログラム実行のトリガーとしてだけ使うことを主目的としています。</dd>
 </dl>
 
 </body>
