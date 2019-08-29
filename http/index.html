@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <title>WWWC用改造HTTPプラグイン</title>
@@ -48,8 +48,8 @@ up6755.zip</a> → いまここ<br>
 新しめの VC++ 2005 ランタイムが必要かもしれません。<a href="http://www.microsoft.com/downloads/ja-jp/details.aspx?FamilyID=ae2e1a40-7b45-4fe9-a20f-2ed2923aca62">これ（2011/06/07）</a>とか。もっと新しいのとか。
 </p>
 <p>
-ダウンロード : <a href="http_140312.zip">http_140312.zip</a> / <a href="http_150513.zip">http_150513.zip</a>（テスト中）<br>
-ソース（改変分のみ） : <a href="http_src_140312.zip">http_src_140312.zip</a> / <a href="http_src_150513.zip">http_src_150513.zip</a>
+ダウンロード : <a href="https://github.com/WWWC-HTTP-plugin/http/releases/download/2015-05-13/http_150513.zip">http_150513.zip</a><br>
+ソース : <a href="https://github.com/WWWC-HTTP-plugin/http">GitHub</a>
 </p>
 
 <h2>使い方</h2>
@@ -57,44 +57,6 @@ up6755.zip</a> → いまここ<br>
 <p>設定の保存ファイル名は標準と同じ wwwc.ini なので共有される。</p>
 <p>フィードチェックは、複数のURLが開くURLに設定され、URLを開くときはプログラムへ同時に送られるので、複数URLに対応できないプログラムを使用している場合は、同梱の app.js をツールに登録し、開くプログラムとして使用する。</p>
 <p><a href="setting.html">詳しい設定方法</a></p>
-<h3>使用例：Gmail</h3>
-<ul>
-<li>WWWC を終了した状態で、同梱の sample-oauth_mail.google.com.ini を oauth_mail.google.com.ini に名前変更して DLL と同じフォルダに置く</li>
-<li>全般 タブ<ul>
-	<li>チェックするURLに「https://mail.google.com/mail/feed/atom」を追加</li>
-</ul></li>
-<li>チェック タブ<ul>
-	<li>「RSS / Atom フィード」のチェックを入れる</li>
-</ul></li>
-<li>オプション タブ<ul>
-	<li>「行う」にチェック</li>
-	<li>「OAuth」にチェック</li>
-	<li>「トークン取得」ボタンを押し、ダイアログの説明に従ってトークンを取得する</li>
-</ul></li>
-<!--
-<li>オプション タブ<ul>
-	<li>「このURLはユーザ認証が必要」にチェック</li>
-	<li>Gmailのユーザ名とパスワードを入力</li>
-</ul></li>
--->
-</ul>
-<p>
-とすると、最も新しい未読メールの日時がWWWCの更新日時、件名が更新情報となる。
-</p>
-
-<h3>使用例：mixi</h3>
-<ul>
-<li>全般 タブ<ul>
-	<li>チェックするURLに「http://mixi.jp/atom/updates/r=1/member_id=00000000」を追加（00000000 は自分のID）</li>
-</ul></li>
-<li>チェック タブ<ul>
-	<li>「RSS / Atom フィード」のチェックを入れる</li>
-</ul></li>
-<li>オプション タブ<ul>
-	<li>「このURLはユーザ認証が必要」にチェックを入れ、「WSSE」を選択</li>
-	<li>mixiのユーザ名とパスワードを入力</li>
-</ul></li>
-</ul>
 
 <h3>フィードチェックの色々な自動設定</h3>
 <p>いろいろされる</p>
